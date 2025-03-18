@@ -20,18 +20,16 @@ public class FootballStatisticsApplication implements CommandLineRunner {
     @Autowired
     private MessageProcessor messageProcessor;
 
+    final String FILE_PATH = "src/main/resources/data/messages_2.txt";
+
     public static void main(String[] args) {
         SpringApplication.run(FootballStatisticsApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-        final String FILE_PATH = "src/main/resources/data/messages_2.txt";
 
-        List<Message> messages = jsonFileReader.readJsonFromFile(FILE_PATH);
-        //messages.forEach(System.out::println);
-
-        processMessage(messages);
+        watchFile(FILE_PATH);
 
     }
 }
