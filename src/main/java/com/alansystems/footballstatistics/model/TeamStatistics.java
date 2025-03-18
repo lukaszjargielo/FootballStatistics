@@ -1,5 +1,7 @@
 package com.alansystems.footballstatistics.model;
 
+import java.util.Locale;
+
 public class TeamStatistics {
     private String name;
     private EventStatuses lastEventStatuses;
@@ -128,8 +130,10 @@ public class TeamStatistics {
         if (teamStatistics.getLastMatchResult() != null) {
             result.append(teamStatistics.getLastMatchResult());
         }
+        double averageAmountOfGoalsInAllEvents = teamStatistics.getAverageAmountOfGoalsInTheTeamEvents();
+        String formattedAverage = String.format(Locale.ENGLISH,"%.2f", averageAmountOfGoalsInAllEvents);
         System.out.println(teamStatistics.getName() + " " + result + " "
-                + teamStatistics.getAverageAmountOfGoalsInTheTeamEvents() + " "
+                + formattedAverage + " "
                 + teamStatistics.getNumberOfPlayedEvents() + " "
                 + teamStatistics.getSumOfGainedPoints() + " " + teamStatistics.getSumOfGoalsScored() + " "
                 + teamStatistics.getSumOfGoalsConceded());
