@@ -26,10 +26,14 @@ public class FootballStatisticsApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        final String FILE_PATH = "src/main/resources/data/messages_2.txt";
 
-        List<Message> messages = jsonFileReader.readJsonFromFile(FILE_PATH);
-        //messages.forEach(System.out::println);
+        if(args.length < 1) {
+            System.err.println("No path to file containing JSON objects was given.");
+            System.exit(1);
+        }
+
+        String filePath = args[0];
+        List<Message> messages = jsonFileReader.readJsonFromFile(filePath);
 
         processMessage(messages);
 
