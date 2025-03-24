@@ -17,9 +17,9 @@ public class MessageProcessor {
 
     public void processMessage(List<Message> messages) {
         for (Message message : messages) {
-            if (message.getType().equals(MessageType.RESULT)) {
+            if (message.getType()==(MessageType.RESULT)) {
                 handleResultMessage(message.getResult());
-            } else if (message.getType().equals(MessageType.GET_STATISTICS)) {
+            } else if (message.getType()==(MessageType.GET_STATISTICS)) {
                 handleGetStatisticsMessage(message.getGetStatistics());
             }
         }
@@ -96,8 +96,8 @@ public class MessageProcessor {
             awayTeamLastEventStatus = EventStatuses.W;
         }
 
-        homeTeamObj.setLastMatchResult(homeTeamLastEventStatus);
-        awayTeamObj.setLastMatchResult(awayTeamLastEventStatus);
+        homeTeamObj.setLastEventStatus(homeTeamLastEventStatus);
+        awayTeamObj.setLastEventStatus(awayTeamLastEventStatus);
 
         homeTeamObj.setSumOfGainedPoints(homeTeamObj.getSumOfGainedPoints() + homeTeamGainedPoints);
         awayTeamObj.setSumOfGainedPoints(awayTeamObj.getSumOfGainedPoints() + awayTeamGainedPoints);
@@ -105,12 +105,12 @@ public class MessageProcessor {
 
     private void updateAverageGoals(TeamStatistics teamObj) {
         double averageGoals = Math.round(((teamObj.getSumOfGoalsScored() + teamObj.getSumOfGoalsConceded()) * 1.0 / teamObj.getNumberOfPlayedEvents()) * 100.0) / 100.0;
-        teamObj.setAverageAmountOfGoalsInTheTeamEvents(averageGoals);
+        teamObj.setAverageAmountOfGoalsInAllEvents(averageGoals);
     }
 
     private void updateTeamStatistics(TeamStatistics teamObj, int goalsScored, int goalsConceded) {
-        teamObj.setThirdLastMatchResult(teamObj.getSecondLastMatchResult());
-        teamObj.setSecondLastMatchResult(teamObj.getLastMatchResult());
+        teamObj.setThirdLastEventStatus(teamObj.getSecondLastEventStatus());
+        teamObj.setSecondLastEventStatus(teamObj.getLastEventStatus());
         teamObj.setNumberOfPlayedEvents(teamObj.getNumberOfPlayedEvents() + 1);
         teamObj.setSumOfGoalsScored(teamObj.getSumOfGoalsScored() + goalsScored);
         teamObj.setSumOfGoalsConceded(teamObj.getSumOfGoalsConceded() + goalsConceded);
